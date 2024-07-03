@@ -8,6 +8,7 @@ public class BindFinder : MonoBehaviour
 {
     private AutoType at;
     private InputField command;
+    private bool typed;
 
     void Start()
     {
@@ -17,12 +18,14 @@ public class BindFinder : MonoBehaviour
 
     public void Find()
     {
+        typed = false;
         for(int i = 0; i < 10000; i++)
         {
             if(PlayerPrefs.GetString($"{i}_name") == command.text)
             {
                 at.displayText = $"Переменная: {PlayerPrefs.GetString($"{i}_name")}\n---------------------------------------\n{PlayerPrefs.GetString($"{i}_valu")}";
                 StartCoroutine(at.DisplayText());
+                typed = true;
                 break;
             }
         }
@@ -44,6 +47,12 @@ public class BindFinder : MonoBehaviour
             {
                 at.text.fontSize = value;
             }
+        }
+
+        else if(!typed)
+        {
+            at.displayText = $"Переменная {command.text} не найдена. Убедитесь, что вы правильно ввели название.";
+            StartCoroutine(at.DisplayText());
         }
     }
 }
