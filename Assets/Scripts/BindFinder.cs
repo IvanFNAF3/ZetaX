@@ -40,7 +40,10 @@ public class BindFinder : MonoBehaviour
         {
             string[] inputSplit = command.text.Split(' ');
             string _fontsize = inputSplit[1];
-            at.text.fontSize = _fontsize;
+            if(int.TryParse(_fontsize, out int value))
+            {
+                at.text.fontSize = value;
+            }
         }
     }
 }
