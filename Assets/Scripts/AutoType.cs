@@ -13,6 +13,7 @@ public class AutoType : MonoBehaviour
     {
         text = GetComponent<Text>();
         displayText = text.text;
+        text.text = "";
         StartCoroutine(DisplayText());
     }
 
